@@ -24,8 +24,8 @@ app.use('/users', usersRouter);
 app.use(cors())
 app.post('/admin/validate', (req,res)=>{
   console.log(req.body)
-  res.render("hello")
-})
+  res.send("hello")
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -33,6 +33,7 @@ app.use(function(req, res, next) {
 
 app.get('http://localhost:5000/heloo',(req,res)=>{
   res.send("hello")
+  res.send(req.body)
 })
 
 // error handler
