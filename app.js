@@ -6,7 +6,10 @@ var logger = require('morgan');
 var cors = require('cors')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var mongo = require('mongodb');
+var assert= require('assert');
 
+var url ='mongodb://localhost:27017/test';
 var app = express();
 
 // view engine setup
@@ -23,18 +26,28 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use(cors())
 app.post('/admin/validate', (req,res)=>{
-  console.log(req.body)
-  res.send("hello")
+  
+  var user ={
+    username: req.body.username,
+    password: req.body.password
+  }
+  res.send(`hello ${user}`);
+  
+  mongo.Connect(url, (err,db)=>{
+    assert.equal(null,err);
+    db.collection('admin-logins').insertOne(user,(err,result)=>{
+      assert.equal(null,err);
+      console.log("inserted");
+      db.close();
+    });
+  })
 });
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-app.get('http://localhost:5000/heloo',(req,res)=>{
-  res.send("hello")
-  res.send(req.body)
-})
+
 
 // error handler
 app.use(function(err, req, res, next) {
