@@ -34,11 +34,13 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use(cors())
 app.post('/admin/validate', (req,res)=>{
-  
+  console.log(req.body);
+  console.log("hello");
   var user ={
     username: req.body.username,
     password: req.body.password
   }
+  console.log({user})
   try{
   db.adminlogins.insertOne({user});
   }catch(e){
