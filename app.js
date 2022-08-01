@@ -42,7 +42,7 @@ app.post('/admin/validate', (req,res)=>{
   }
   console.log({user})
   try{
-  db.adminlogins.insertOne({user});
+  Db.adminlogins.insertOne({user});
   }catch(e){
     console.log(e);
   }
