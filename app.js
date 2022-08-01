@@ -8,10 +8,17 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var assert= require('assert');
-require('./db/mongoose')
+const mongoose = require('mongoose');
+const { Db } = require('mongodb');
 
-var url ='mongodb://localhost:27017/test';
+
+
 var app = express();
+//mongodb connection code
+mongoose.connect('mongodb+srv://XdithyX:adhi%404136@thecocktail.hzdrmoi.mongodb.net/admin-logins',{
+  useUnifiedTopology : true,
+  useNewUrlParser : true
+}).then(console.log("connected to mongo db"))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,6 +38,11 @@ app.post('/admin/validate', (req,res)=>{
   var user ={
     username: req.body.username,
     password: req.body.password
+  }
+  try{
+  db.adminlogins.insertOne({user});
+  }catch(e){
+    console.log(e);
   }
   res.send(`hello ${user}`);
   
