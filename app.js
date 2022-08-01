@@ -6,8 +6,9 @@ var logger = require('morgan');
 var cors = require('cors')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var mongo = require('mongodb');
+
 var assert= require('assert');
+require('./db/mongoose')
 
 var url ='mongodb://localhost:27017/test';
 var app = express();
@@ -33,15 +34,16 @@ app.post('/admin/validate', (req,res)=>{
   }
   res.send(`hello ${user}`);
   
-  mongo.Connect(url, (err,db)=>{
-    assert.equal(null,err);
-    db.collection('admin-logins').insertOne(user,(err,result)=>{
-      assert.equal(null,err);
-      console.log("inserted");
-      db.close();
-    });
-  })
+
 });
+
+app.get('/get-adminlogins', (req,res)=>{
+
+
+});
+
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
