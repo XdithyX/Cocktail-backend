@@ -10,7 +10,7 @@ var usersRouter = require('./routes/users');
 var assert= require('assert');
 const mongoose = require('mongoose');
 const { Db } = require('mongodb');
-
+var adminlogins = require('./schemas/schema')
 
 
 var app = express();
@@ -42,11 +42,14 @@ app.post('/admin/validate', (req,res)=>{
   }
   console.log({user})
   try{
-  Db.adminlogins.insertOne({user});
+  adminlogins.create({username: user.username,password: user.password},(err,doc)=>{
+    if(err)
+    console.log(err);
+  });
   }catch(e){
     console.log(e);
   }
-  res.send(`hello ${user}`);
+  
   
 
 });
