@@ -31,6 +31,9 @@ const addadmin= asyncHandler( async(req,res)=>{
         })
     
     
+   }else{
+    res.status(400);
+    throw new Error('Invalid user data')
    }}
 
 })
@@ -41,13 +44,13 @@ router.post('/add-admins', addadmin)
 router.post('/validate', (req,res)=>{
   console.log(req.body);
   console.log("hello");
-  var user ={
-    username: req.body.username,
-    password: req.body.password
-  }
-  console.log({user})
+   const {
+    username,
+    password
+  }= req.body
+  
   try{
-  adminlogins.create({username: user.username,password: user.password},(err,doc)=>{
+  adminlogins.create({username,password},(err,doc)=>{
     if(err)
     console.log(err);
   });

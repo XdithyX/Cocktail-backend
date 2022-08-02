@@ -4,6 +4,7 @@ const adminSchema = new schema({
     name : { type: String },
   username: { type: String },
   password: { type: String },
+  
  
 });
 
