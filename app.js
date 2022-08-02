@@ -6,11 +6,11 @@ var logger = require('morgan');
 var cors = require('cors')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var adminRouter = require('./routes/admin')
 var assert= require('assert');
 const mongoose = require('mongoose');
 const { Db } = require('mongodb');
-var adminlogins = require('./schemas/schema')
+
 
 
 var app = express();
@@ -33,31 +33,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use(cors())
-app.post('/admin/validate', (req,res)=>{
-  console.log(req.body);
-  console.log("hello");
-  var user ={
-    username: req.body.username,
-    password: req.body.password
-  }
-  console.log({user})
-  try{
-  adminlogins.create({username: user.username,password: user.password},(err,doc)=>{
-    if(err)
-    console.log(err);
-  });
-  }catch(e){
-    console.log(e);
-  }
-  
-  
-
-});
-
-app.get('/get-adminlogins', (req,res)=>{
+app.use('/admin', adminRouter);
 
 
-});
 
 
 
