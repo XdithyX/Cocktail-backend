@@ -19,7 +19,7 @@ const addadmin= asyncHandler( async(req,res)=>{
     throw new Error('user exists');
    } 
 
-   else{
+   else{//
     const admin= await admins.create({
         name, username, password
     })
