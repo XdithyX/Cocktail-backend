@@ -6,14 +6,14 @@ var logger = require('morgan');
 var cors = require('cors')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var adminRouter = require('./routes/admin')
+var adminRouter = require('./routes/admin')                                                  //adding packages
 var assert= require('assert');
 const mongoose = require('mongoose');
 const { Db } = require('mongodb');
 
 
 
-var app = express();
+var app = express();               //adding express app
 //mongodb connection code
 mongoose.connect('mongodb+srv://XdithyX:adhi%404136@thecocktail.hzdrmoi.mongodb.net/admin-logins',{
   useUnifiedTopology : true,
@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use(cors())
+app.use(cors())                                  //using routers
 app.use('/admin', adminRouter);
 
 
