@@ -11,5 +11,5 @@ const adminSchema = new schema({
 
 
   
-
+//creating schema and exporting it
 module.exports= mongoose.model("admins", adminSchema);
