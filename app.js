@@ -19,7 +19,7 @@ mongoose.connect('mongodb+srv://XdithyX:adhi%404136@thecocktail.hzdrmoi.mongodb.
   useUnifiedTopology : true,
   useNewUrlParser : true
 }).then(console.log("connected to mongo db"))
-
+//VIEW
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
