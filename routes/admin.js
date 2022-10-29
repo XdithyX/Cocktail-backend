@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var adminlogins = require('../schemas/schema')
 var asyncHandler = require('express-async-handler')
-var admins = require('../schemas/adminschema')
+var admins = require('../schemas/adminschema')                                       //importing packages
 
 const addadmin= asyncHandler( async(req,res)=>{
     const { name,username , password}= req.body
@@ -10,7 +10,7 @@ const addadmin= asyncHandler( async(req,res)=>{
    if(!username || ! password)
    {
     res.status(400)
-    throw new Error('please add all field');
+    throw new Error('please add all field');                                 //if no username and password
    } 
   
    const userExist= await admins.findOne({username})
@@ -21,7 +21,7 @@ const addadmin= asyncHandler( async(req,res)=>{
 
    else{//
     const admin= await admins.create({
-        name, username, password
+        name, username, password                                                //create admin
     })
     if(admin){
         res.status(201).json({
